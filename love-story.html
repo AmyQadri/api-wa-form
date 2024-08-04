@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Cerita Cinta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app" class="container mt-5">
+        <h1>Form Cerita Cinta</h1>
+        <form @submit.prevent="submitForm">
+            <div v-for="(cerita, index) in ceritaList" :key="index" class="mb-4 border p-3">
+                <h2>Cerita Cinta {{ index + 1 }}</h2>
+                <div class="mb-3">
+                    <label class="form-label">Judul</label>
+                    <input type="text" class="form-control" v-model="cerita.judul" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Tanggal</label>
+                    <input type="date" class="form-control" v-model="cerita.tanggal" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Cerita</label>
+                    <textarea class="form-control" v-model="cerita.cerita" required></textarea>
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary mb-3" @click="addCerita">Tambah Cerita Cinta</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                ceritaList: [
+                    {
+                        judul: '',
+                        tanggal: '',
+                        cerita: ''
+                    }
+                ]
+            },
+            methods: {
+                addCerita() {
+                    this.ceritaList.push({
+                        judul: '',
+                        tanggal: '',
+                        cerita: ''
+                    });
+                },
+                submitForm() {
+                    let message = 'Cerita Cinta:\n\n';
+                    this.ceritaList.forEach((cerita, index) => {
+                        message += `Cerita Cinta ${index + 1}:\n` +
+                            `Judul: ${cerita.judul}\n` +
+                            `Tanggal: ${cerita.tanggal}\n` +
+                            `Cerita: ${cerita.cerita}\n\n`;
+                    });
+
+                    const phoneNumber = '6281244695556';
+                    const apiUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+                    window.open(apiUrl, '_blank');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

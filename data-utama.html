@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Undangan Digital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app" class="container mt-5">
+        <h1>Order Undangan Digital - Luxury 1</h1>
+        <form @submit.prevent="submitForm">
+            <h2>Data Mempelai Laki-laki</h2>
+            <div class="mb-3">
+                <label for="namaPria" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="namaPria" v-model="form.namaPria" required>
+            </div>
+            <div class="mb-3">
+                <label for="namaPendekPria" class="form-label">Nama Pendek</label>
+                <input type="text" class="form-control" id="namaPendekPria" v-model="form.namaPendekPria" required>
+            </div>
+            <div class="mb-3">
+                <label for="namaAyahPria" class="form-label">Nama Ayah</label>
+                <input type="text" class="form-control" id="namaAyahPria" v-model="form.namaAyahPria" required>
+            </div>
+            <div class="mb-3">
+                <label for="namaIbuPria" class="form-label">Nama Ibu</label>
+                <input type="text" class="form-control" id="namaIbuPria" v-model="form.namaIbuPria" required>
+            </div>
+            <div class="mb-3">
+                <label for="instagramPria" class="form-label">Link Instagram</label>
+                <input type="text" class="form-control" id="instagramPria" v-model="form.instagramPria">
+            </div>
+            <div class="mb-3">
+                <label for="alamatPria" class="form-label">Beralamat di</label>
+                <input type="text" class="form-control" id="alamatPria" v-model="form.alamatPria" required>
+            </div>
+
+            <h2>Data Mempelai Perempuan</h2>
+            <div class="mb-3">
+                <label for="namaWanita" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="namaWanita" v-model="form.namaWanita" required>
+            </div>
+            <div class="mb-3">
+                <label for="namaPendekWanita" class="form-label">Nama Pendek</label>
+                <input type="text" class="form-control" id="namaPendekWanita" v-model="form.namaPendekWanita" required>
+            </div>
+            <div class="mb-3">
+                <label for="namaAyahWanita" class="form-label">Nama Ayah</label>
+                <input type="text" class="form-control" id="namaAyahWanita" v-model="form.namaAyahWanita" required>
+            </div>
+            <div class="mb-3">
+                <label for="namaIbuWanita" class="form-label">Nama Ibu</label>
+                <input type="text" class="form-control" id="namaIbuWanita" v-model="form.namaIbuWanita" required>
+            </div>
+            <div class="mb-3">
+                <label for="instagramWanita" class="form-label">Link Instagram</label>
+                <input type="text" class="form-control" id="instagramWanita" v-model="form.instagramWanita">
+            </div>
+            <div class="mb-3">
+                <label for="alamatWanita" class="form-label">Beralamat di</label>
+                <input type="text" class="form-control" id="alamatWanita" v-model="form.alamatWanita" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                form: {
+                    namaPria: '',
+                    namaPendekPria: '',
+                    namaAyahPria: '',
+                    namaIbuPria: '',
+                    instagramPria: '',
+                    alamatPria: '',
+                    namaWanita: '',
+                    namaPendekWanita: '',
+                    namaAyahWanita: '',
+                    namaIbuWanita: '',
+                    instagramWanita: '',
+                    alamatWanita: ''
+                }
+            },
+            methods: {
+                submitForm() {
+                    const message = `Order Undangan Digital Pernikahan, berikut data-data nya :\n\n` +
+                        `Data Mempelai Laki-laki:\n` +
+                        `Nama: ${this.form.namaPria}\n` +
+                        `Nama pendek: ${this.form.namaPendekPria}\n` +
+                        `Nama Ayah: ${this.form.namaAyahPria}\n` +
+                        `Nama Ibu: ${this.form.namaIbuPria}\n` +
+                        `Link Instagram: ${this.form.instagramPria}\n` +
+                        `Beralamat di: ${this.form.alamatPria}\n\n` +
+                        `Data Mempelai Perempuan:\n` +
+                        `Nama: ${this.form.namaWanita}\n` +
+                        `Nama pendek: ${this.form.namaPendekWanita}\n` +
+                        `Nama Ayah: ${this.form.namaAyahWanita}\n` +
+                        `Nama Ibu: ${this.form.namaIbuWanita}\n` +
+                        `Link Instagram: ${this.form.instagramWanita}\n` +
+                        `Beralamat di: ${this.form.alamatWanita}`;
+
+                    const phoneNumber = '6281244695556';
+                    const apiUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+                    window.open(apiUrl, '_blank');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
